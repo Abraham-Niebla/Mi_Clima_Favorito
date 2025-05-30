@@ -1,4 +1,4 @@
-package uabc.miclimafavorito.data
+package uabc.miclimafavorito.data.weather
 
 import com.google.gson.annotations.SerializedName
 
@@ -10,5 +10,4 @@ data class SearchResponse(
     @SerializedName("lat") val latitude: Double = 0.0,      // Coordenada Latitud
     @SerializedName("lon") val longitude: Double = 0.0,     // Coordenada Longitud
     @SerializedName("url") val localTime: String = ""       // url de la ciudad
-
 )

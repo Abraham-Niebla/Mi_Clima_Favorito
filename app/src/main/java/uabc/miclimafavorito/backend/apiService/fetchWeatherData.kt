@@ -1,7 +1,7 @@
-package uabc.miclimafavorito.apiService
+package uabc.miclimafavorito.backend.apiService
 
-import uabc.miclimafavorito.data.SearchResponse
-import uabc.miclimafavorito.data.WeatherResponse
+import uabc.miclimafavorito.data.weather.SearchResponse
+import uabc.miclimafavorito.data.weather.WeatherResponse
 
 suspend fun fetchWeatherData(ciudad: String): WeatherResponse {
     return try {

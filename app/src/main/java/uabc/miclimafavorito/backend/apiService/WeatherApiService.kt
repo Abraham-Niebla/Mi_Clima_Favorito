@@ -1,11 +1,12 @@
-package uabc.miclimafavorito.apiService
+package uabc.miclimafavorito.backend.apiService
 
 import retrofit2.Retrofit
 import retrofit2.http.GET
 import retrofit2.http.Query
-import uabc.miclimafavorito.data.WeatherResponse
+import uabc.miclimafavorito.data.weather.WeatherResponse
 import retrofit2.converter.gson.GsonConverterFactory
-import uabc.miclimafavorito.data.SearchResponse
+import uabc.miclimafavorito.data.weather.SearchResponse
+import uabc.miclimafavorito.globals.BASE_API_URL
 
 
 interface WeatherApiService {
@@ -25,7 +26,7 @@ interface WeatherApiService {
 }
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://api.weatherapi.com/"
+    private const val BASE_URL = BASE_API_URL
 
     val api: WeatherApiService by lazy {
         Retrofit.Builder()

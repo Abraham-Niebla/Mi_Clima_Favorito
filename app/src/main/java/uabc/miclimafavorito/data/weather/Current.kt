@@ -1,22 +1,6 @@
-package uabc.miclimafavorito.data
+package uabc.miclimafavorito.data.weather
 
 import com.google.gson.annotations.SerializedName
-
-data class WeatherResponse(
-    @SerializedName("location") val location: Location = Location(),        // Datos de la ciudad
-    @SerializedName("current") val current: Current = Current()             // Datos del clima
-)
-
-data class Location(
-    @SerializedName("name") val name: String = "",                          // Ciudad
-    @SerializedName("region") val region: String = "",                      // Estado o región
-    @SerializedName("country") val country: String = "",                    // País
-    @SerializedName("lat") val latitude: Double = 0.0,                      // Coordenada Latitud
-    @SerializedName("lon") val longitude: Double = 0.0,                     // Coordenada Longitud
-    @SerializedName("tz_id") val timeZoneId: String = "",                   // Zona horaria
-//    @SerializedName("localtime_epoch") val localTimeEpoch: Long,
-    @SerializedName("localtime") val localTime: String = ""                 // Fecha y Hora actuales en la ciudad
-)
 
 data class Current(
 //    @SerializedName("last_updated_epoch") val lastUpdatedEpoch: Long,
@@ -56,10 +40,4 @@ data class Current(
     */
     @SerializedName("gust_mph") val gustMph: Double = 0.0,                  // Ráfagas de viento Mi/h
     @SerializedName("gust_kph") val gustKph: Double = 0.0                   // Ráfagas de viento km/h
-)
-
-data class Condition(
-    @SerializedName("text") val description: String = "",               // Descripción textual del tipo de clima
-//    @SerializedName("icon") val iconUrl: String,
-    @SerializedName("code") val code: Int = 1000                        // Identificador del tipo de clima
 )

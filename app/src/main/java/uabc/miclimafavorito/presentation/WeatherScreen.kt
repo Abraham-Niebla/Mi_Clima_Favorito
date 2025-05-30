@@ -2,58 +2,57 @@ package uabc.miclimafavorito.presentation
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import kotlinx.coroutines.launch
-import uabc.miclimafavorito.apiService.fetchWeatherData
+import androidx.compose.runtime.collectAsState
+import androidx.compose.material3.*
+import androidx.lifecycle.viewmodel.compose.viewModel
+import uabc.miclimafavorito.backend.apiService.WeatherViewModel
 
 @Composable
-fun WeatherScreen(modifier: Modifier = Modifier) {
-    var ciudad by remember { mutableStateOf(TextFieldValue("")) }
-    val scope = rememberCoroutineScope()
+fun WeatherScreen(
+    modifier: Modifier = Modifier,
+    viewModel: WeatherViewModel = viewModel()
+) {
+    var cityInput by remember { mutableStateOf("") }
+
+    val weatherState by viewModel.weatherState.collectAsState()
 
     Column(
         modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .padding(16.dp)
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        TextField(
-            value = ciudad,
-            onValueChange = { ciudad = it },
+        OutlinedTextField(
+            value = cityInput,
+            onValueChange = { cityInput = it },
             label = { Text("Ciudad") },
             modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
-
         Button(
-            onClick = {
-                scope.launch {
-                    Log.I("SearchCity", ciudad.toString())
-                    fetchWeatherData(ciudad.toString()) // Llama a tu función con el texto ingresado
-                }
-            },
+            onClick = { viewModel.getWeather(cityInput) },
             modifier = Modifier.fillMaxWidth()
         ) {
             Text("Buscar clima")
+        }
+
+        weatherState?.let { weather ->
+            Text(text = "Ciudad: ${weather.location.name}")
+            Text(text = "Temperatura: ${weather.current.temperatureC} °C")
+            Text(text = "Humedad: ${weather.current.humidity} %")
+            Text(text = "Descripción: ${weather.current.condition.description}")
         }
     }
 }
