@@ -11,10 +11,10 @@ interface CityDao {
     suspend fun insertCity(city: City): Long
 
     @Query("SELECT * FROM t_city WHERE id_ciudad = :id")
-    suspend fun getCityById(id: Int): City?
+    fun getCityByIdFlow(id: Int): Flow<City?>
 
     @Query("SELECT * FROM t_city ORDER BY id_ciudad ASC")
-    fun getAllCities(): Flow<List<City>>
+    fun getAllCities(): List<City>
 
     @Delete
     suspend fun deleteCity(city: City)

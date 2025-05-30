@@ -57,6 +57,11 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
+    //  Necesario para fuentes e íconos
+    implementation(libs.androidx.ui.text.google.fonts)
+    implementation(libs.androidx.material.icons.extended)
+    implementation(libs.material3)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

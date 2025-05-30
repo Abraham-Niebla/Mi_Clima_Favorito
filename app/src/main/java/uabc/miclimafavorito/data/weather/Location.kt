@@ -3,12 +3,12 @@ package uabc.miclimafavorito.data.weather
 import com.google.gson.annotations.SerializedName
 
 data class Location(
-    @SerializedName("name") val name: String = "",                          // Ciudad
-    @SerializedName("region") val region: String = "",                      // Estado o región
-    @SerializedName("country") val country: String = "",                    // País
-    @SerializedName("lat") val latitude: Double = 0.0,                      // Coordenada Latitud
-    @SerializedName("lon") val longitude: Double = 0.0,                     // Coordenada Longitud
-    @SerializedName("tz_id") val timeZoneId: String = "",                   // Zona horaria
-//    @SerializedName("localtime_epoch") val localTimeEpoch: Long,
-    @SerializedName("localtime") val localTime: String = ""                 // Fecha y Hora actuales en la ciudad
+    @SerializedName("name") val name: String            = "No encontrado",  // Nombre de la ciudad
+    @SerializedName("region") val region: String        = "",               // Región o estado
+    @SerializedName("country") val country: String      = "",               // País
+    @SerializedName("lat") val lat: Double              = 0.0,              // Latitud
+    @SerializedName("lon") val lon: Double              = 0.0,              // Longitud
+    @SerializedName("tz_id") val tzId: String           = "",               // Zona horaria
+    @SerializedName("localtime") val localtime: String  = "",               // Fecha y hora local como cadena
+//    @SerializedName("localtime_epoch") val localtimeEpoch: Long = 0       // Puedes agregar si lo necesitas
 )

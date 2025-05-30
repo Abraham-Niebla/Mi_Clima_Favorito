@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Mi Clima Favorito</string>
+
+    <string name="page_return">Regresar</string>
+    <string name="page_favorites">Ciudades favoritas</string>
+
+
+    <string name="favorites_title"> Ciudades Favoritas </string>
+    <string name="weather_title"> Clima </string>
+    <string name="C"> A </string>
+    <string name="D"> A </string>
+    <string name="E"> A </string>
+    <string name="F"> A </string>
+    <string name="G"> A </string>
+    <string name="H"> A </string>
+    <string name="I"> A </string>
+    <string name="J"> A </string>
+
 </resources>
