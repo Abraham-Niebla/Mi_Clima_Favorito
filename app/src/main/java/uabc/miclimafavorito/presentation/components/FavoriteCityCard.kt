@@ -6,11 +6,15 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 import uabc.miclimafavorito.data.city.CityResponse
 import uabc.miclimafavorito.ui.theme.extendedColors
+import uabc.miclimafavorito.R
+import uabc.miclimafavorito.globals.BASE_ICON_URL
 
 @Composable
 fun FavoriteCityCard(
@@ -19,21 +23,28 @@ fun FavoriteCityCard(
     onClick: () -> Unit = {}
 ) {
 
-    val backgroundColor = when(cityData.current.isDay){
-        0       ->  MaterialTheme.extendedColors.nightContainer
-        else    ->  MaterialTheme.extendedColors.dayContainer
+    val fileName = cityData.current.condition.icon.substringAfterLast("/")
+    val day = when (cityData.current.isDay) {
+        1 -> "day"
+        else -> "night"
     }
-    val contentColor = when(cityData.current.isDay){
-        0       ->  MaterialTheme.extendedColors.onNightContainer
-        else    ->  MaterialTheme.extendedColors.onDayContainer
+    val iconUrl = "https:${BASE_ICON_URL}/$day/$fileName"
+
+    val backgroundColor = when (cityData.current.isDay) {
+        0 -> MaterialTheme.extendedColors.nightContainer
+        else -> MaterialTheme.extendedColors.dayContainer
+    }
+    val contentColor = when (cityData.current.isDay) {
+        0 -> MaterialTheme.extendedColors.onNightContainer
+        else -> MaterialTheme.extendedColors.onDayContainer
     }
 
     ElevatedCard(
         modifier = modifier
             .clickable { onClick() },
         colors = CardDefaults.elevatedCardColors(
-            containerColor  = backgroundColor,
-            contentColor    = contentColor
+            containerColor = backgroundColor,
+            contentColor = contentColor
         )
     ) {
         Row(
@@ -58,17 +69,28 @@ fun FavoriteCityCard(
                 )
             }
 
-            // Segunda columna: temperatura, alineada a la derecha
+            Column(
+                modifier = Modifier
+                    .align(Alignment.CenterVertically),
+//                horizontalAlignment = Alignment.End
+            ) {
+                AsyncImage(
+                    model = iconUrl,
+                    contentDescription = cityData.current.condition.description,
+                    modifier = Modifier
+                )
+            }
+
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterVertically),
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = "${cityData.current.tempC}°C",
+                    text = stringResource(R.string.temp, cityData.current.tempC),
                     fontSize = 32.sp,
                     textAlign = TextAlign.End,
-                    style = MaterialTheme.typography.displaySmall
+                    style = MaterialTheme.typography.headlineMedium
                 )
             }
         }

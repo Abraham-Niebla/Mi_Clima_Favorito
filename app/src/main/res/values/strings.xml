@@ -4,6 +4,7 @@
     <string name="page_return">Regresar</string>
     <string name="page_favorites">Ciudades favoritas</string>
 
+    <string name="temp">%.1f°C</string>
     <string name="max_temp">Max: %.1f°C</string>
     <string name="min_temp">Min: %.1f°C</string>
     <string name="prom_temp">Prom: %.1f°C</string>
