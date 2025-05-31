@@ -4,10 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import uabc.miclimafavorito.backend.database.CityViewModel
 import uabc.miclimafavorito.presentation.screens.CityAddScreen
 import uabc.miclimafavorito.ui.theme.MiClimaFavoritoTheme
 
@@ -20,6 +22,7 @@ class CityActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val cityUrl = intent.getStringExtra("city_url") ?: ""
+        val cityViewModel: CityViewModel by viewModels()
 
         enableEdgeToEdge()
         setContent {
@@ -27,7 +30,8 @@ class CityActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     CityAddScreen(
                         modifier = Modifier.padding(innerPadding),
-                        cityUrl = cityUrl
+                        cityUrl = cityUrl,
+                        cityViewModel = cityViewModel
                     )
                 }
             }

@@ -13,19 +13,30 @@ import androidx.compose.ui.Modifier
 import uabc.miclimafavorito.backend.apiService.WeatherViewModel
 import uabc.miclimafavorito.data.weather.WeatherResponse
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import uabc.miclimafavorito.backend.database.CityViewModel
+import uabc.miclimafavorito.data.city.City
 
 @Composable
 fun CityAddScreen(
     cityUrl: String,
     modifier: Modifier,
-    isFavorite: Boolean = false,
-    onFavoriteClick: () -> Unit = {}
+    cityViewModel: CityViewModel
 ) {
+    var isFavorite by remember { mutableStateOf(false) }
     val weatherViewModel: WeatherViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
     val weather by weatherViewModel.weatherState.collectAsState()
+    val cityState by cityViewModel.selectedCity.collectAsState()
 
     LaunchedEffect(cityUrl) {
         weatherViewModel.getWeather(cityUrl)
+        cityViewModel.getCityByUrl(cityUrl)
+    }
+    // Cuando cambie el resultado de búsqueda
+    LaunchedEffect(cityState) {
+        isFavorite = cityState != null
     }
 
     if (weather == null) {
@@ -42,7 +53,22 @@ fun CityAddScreen(
         CityAddView(
             weather = weather ?: WeatherResponse(),
             isFavorite = isFavorite,
-            onFavoriteClick = onFavoriteClick
+            onFavoriteClick = {
+                if (isFavorite) {
+                    cityState?.let { cityViewModel.deleteCity(it) }
+                } else {
+                    weather?.let {
+                        val newCity = City(
+                            name = it.location.name,
+                            lat = it.location.lat,
+                            lon = it.location.lon,
+                            url = cityUrl
+                        )
+                        cityViewModel.insertCity(newCity)
+                    }
+                }
+                isFavorite = !isFavorite
+            }
         )
     }
 }

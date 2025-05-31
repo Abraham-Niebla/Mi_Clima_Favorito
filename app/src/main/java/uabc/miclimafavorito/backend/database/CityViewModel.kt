@@ -59,4 +59,16 @@ class CityViewModel(application: Application) : AndroidViewModel(application) {
             _selectedCity.value = repository.getCityByUrl(url)
         }
     }
+
+    fun toggleCity(city: City) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val existingCity = repository.getCityByUrl(city.url)
+            if (existingCity != null) {
+                repository.delete(existingCity)
+            } else {
+                repository.insert(city)
+            }
+        }
+    }
+
 }

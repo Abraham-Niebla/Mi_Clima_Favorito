@@ -7,6 +7,8 @@ import androidx.compose.ui.res.stringResource
 import uabc.miclimafavorito.R
 import uabc.miclimafavorito.presentation.components.AppTopBar
 import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -15,7 +17,10 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import uabc.miclimafavorito.actividades.AddFavoriteActivity
+import uabc.miclimafavorito.actividades.CityActivity
 import uabc.miclimafavorito.actividades.FavoritesActivity
 import uabc.miclimafavorito.data.city.CityResponse
 import uabc.miclimafavorito.presentation.components.FavoriteCityCard
@@ -26,6 +31,7 @@ fun FavoritesView(
     cityData: List<CityResponse>
 ) {
     val activity = LocalActivity.current
+    val context = LocalContext.current
 
     Scaffold(
         topBar = {
@@ -53,12 +59,21 @@ fun FavoritesView(
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(paddingValues)
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(cityData) { city ->
                 FavoriteCityCard(
                     modifier = Modifier,
-                    cityData = city
+                    cityData = city,
+                    onClick = {
+                        val intent = Intent(context, CityActivity::class.java).apply {
+                            putExtra("city_url", city.url)
+                        }
+                        context.startActivity(intent)
+                    }
                 )
             }
         }

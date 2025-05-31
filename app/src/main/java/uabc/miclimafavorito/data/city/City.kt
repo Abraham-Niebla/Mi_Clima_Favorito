@@ -1,9 +1,14 @@
 package uabc.miclimafavorito.data.city
+
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import androidx.room.Index
 
-@Entity(tableName = "t_city")
+@Entity(
+    tableName = "t_city",
+    indices = [Index(value = ["tx_url"], unique = true)]
+)
 data class City(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_ciudad")
@@ -13,10 +18,10 @@ data class City(
     val name: String,
 
     @ColumnInfo(name = "dc_lat")
-    val lat: Float,
+    val lat: Double,
 
     @ColumnInfo(name = "dc_lon")
-    val lon: Float,
+    val lon: Double,
 
     @ColumnInfo(name = "tx_url")
     val url: String

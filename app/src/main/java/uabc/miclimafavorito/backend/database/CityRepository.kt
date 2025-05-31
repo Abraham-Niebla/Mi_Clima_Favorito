@@ -20,11 +20,12 @@ class CityRepository(private val cityDao: CityDao) {
         return cityDao.getCityById(id)
     }
 
-    fun getCities(){
+    fun getCities() {
         this.allCities = cityDao.getAllCities()
     }
 
     suspend fun getCityByUrl(url: String): City? {
         return cityDao.getCityByUrl(url)
     }
+
 }
