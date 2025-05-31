@@ -20,7 +20,19 @@ class WeatherViewModel : ViewModel() {
     fun getWeather(ciudad: String) {
         viewModelScope.launch {
             val data = fetchWeatherData(ciudad)
-            _weatherState.value = data
+
+            val updatedForecastDays = data.forecast.forecastDay.map { forecastDay ->
+                val updatedCondition = forecastDay.day.condition.copy(
+                    icon = forecastDay.day.condition.icon.replace("64x64", "128x128")
+                )
+                val updatedDay = forecastDay.day.copy(condition = updatedCondition)
+                forecastDay.copy(day = updatedDay)
+            }
+
+            val updatedForecast = data.forecast.copy(forecastDay = updatedForecastDays)
+            val updatedData = data.copy(forecast = updatedForecast)
+
+            _weatherState.value = updatedData
         }
     }
 
