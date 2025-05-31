@@ -9,5 +9,5 @@ data class SearchResponse(
     @SerializedName("country") val country: String  = "",   // País
     @SerializedName("lat") val latitude: Double     = 0.0,  // Coordenada Latitud
     @SerializedName("lon") val longitude: Double    = 0.0,  // Coordenada Longitud
-    @SerializedName("url") val localTime: String    = ""    // url de la ciudad
+    @SerializedName("url") val url: String          = ""    // url de la ciudad
 )

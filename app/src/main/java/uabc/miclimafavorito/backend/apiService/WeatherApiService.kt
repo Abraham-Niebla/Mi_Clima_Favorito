@@ -10,18 +10,19 @@ import uabc.miclimafavorito.globals.BASE_API_URL
 
 
 interface WeatherApiService {
-    @GET("v1/current.json")
+    @GET("v1/forecast.json")
     suspend fun getCurrentWeather(
         @Query("key") apiKey: String,
         @Query("q") location: String,
-        @Query("lang") language: String
+        @Query("lang") language: String,
+        @Query("days") days: Int
     ): WeatherResponse
 
     @GET("v1/search.json")
     suspend fun getSearchCities(
         @Query("key") apiKey: String,
         @Query("q") location: String,
-        @Query("lang") language: String
+        @Query("lang") language: String,
     ): List<SearchResponse>
 }
 

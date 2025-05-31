@@ -7,7 +7,7 @@
 
     <string name="favorites_title"> Ciudades Favoritas </string>
     <string name="weather_title"> Clima </string>
-    <string name="C"> A </string>
+    <string name="add_city"> Agregar ciudad </string>
     <string name="D"> A </string>
     <string name="E"> A </string>
     <string name="F"> A </string>

@@ -6,12 +6,25 @@ import uabc.miclimafavorito.interfaces.city.CityDao
 
 class CityRepository(private val cityDao: CityDao) {
 
-    fun getAllCities(): List<City> = cityDao.getAllCities()
+    var allCities: Flow<List<City>> = cityDao.getAllCities()
 
-    fun getCityById(id: Int): Flow<City?> = cityDao.getCityByIdFlow(id)
+    suspend fun insert(city: City) {
+        cityDao.insertCity(city)
+    }
 
-    suspend fun insert(city: City) = cityDao.insertCity(city)
+    suspend fun delete(city: City) {
+        cityDao.deleteCity(city)
+    }
 
-    suspend fun delete(city: City) = cityDao.deleteCity(city)
+    suspend fun getCityById(id: Int): City? {
+        return cityDao.getCityById(id)
+    }
+
+    fun getCities(){
+        this.allCities = cityDao.getAllCities()
+    }
+
+    suspend fun getCityByUrl(url: String): City? {
+        return cityDao.getCityByUrl(url)
+    }
 }
-

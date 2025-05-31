@@ -34,7 +34,7 @@ class FavoritesActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val vm: CityViewModel = viewModel()
-            val favCities = vm.getAllCities()
+            val favCities by vm.allCities.collectAsState()
 
             val weatherViewModel: WeatherViewModel = viewModel()
             val cityWeatherData by weatherViewModel.weatherState.collectAsState()

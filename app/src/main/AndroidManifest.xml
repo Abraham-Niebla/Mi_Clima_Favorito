@@ -33,6 +33,12 @@
         <activity
             android:name=".actividades.FavoritesActivity"
             android:theme="@style/Theme.MiClimaFavorito" />
+        <activity
+            android:name=".actividades.AddFavoriteActivity"
+            android:theme="@style/Theme.MiClimaFavorito" />
+        <activity
+            android:name=".actividades.CityActivity"
+            android:theme="@style/Theme.MiClimaFavorito" />
 
     </application>
 

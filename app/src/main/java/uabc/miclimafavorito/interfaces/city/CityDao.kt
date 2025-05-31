@@ -11,11 +11,14 @@ interface CityDao {
     suspend fun insertCity(city: City): Long
 
     @Query("SELECT * FROM t_city WHERE id_ciudad = :id")
-    fun getCityByIdFlow(id: Int): Flow<City?>
+    suspend fun getCityById(id: Int): City?
 
     @Query("SELECT * FROM t_city ORDER BY id_ciudad ASC")
-    fun getAllCities(): List<City>
+    fun getAllCities(): Flow<List<City>>
 
     @Delete
     suspend fun deleteCity(city: City)
+
+    @Query("SELECT * FROM t_city WHERE tx_url = :url LIMIT 1")
+    suspend fun getCityByUrl(url: String): City?
 }

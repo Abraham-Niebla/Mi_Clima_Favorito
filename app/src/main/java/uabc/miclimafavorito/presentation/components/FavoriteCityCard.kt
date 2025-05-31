@@ -1,5 +1,6 @@
 package uabc.miclimafavorito.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -14,7 +15,8 @@ import uabc.miclimafavorito.ui.theme.extendedColors
 @Composable
 fun FavoriteCityCard(
     modifier: Modifier = Modifier,
-    cityData: CityResponse
+    cityData: CityResponse,
+    onClick: () -> Unit = {}
 ) {
 
     val backgroundColor = when(cityData.current.isDay){
@@ -27,7 +29,8 @@ fun FavoriteCityCard(
     }
 
     ElevatedCard(
-        modifier = modifier,
+        modifier = modifier
+            .clickable { onClick() },
         colors = CardDefaults.elevatedCardColors(
             containerColor  = backgroundColor,
             contentColor    = contentColor
@@ -62,7 +65,7 @@ fun FavoriteCityCard(
                 horizontalAlignment = Alignment.End
             ) {
                 Text(
-                    text = "$cityData.current.tempC",
+                    text = "${cityData.current.tempC}°C",
                     fontSize = 32.sp,
                     textAlign = TextAlign.End,
                     style = MaterialTheme.typography.displaySmall

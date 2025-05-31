@@ -43,9 +43,8 @@ fun WeatherScreen(
                 title = stringResource(R.string.weather_title),  // define este string en strings.xml
                 onBackClick = {
                     activity?.let {
-                        val intent = Intent(it, FavoritesActivity::class.java) // Cambia MainActivity por la actividad destino
+                        val intent = Intent(it, FavoritesActivity::class.java)
                         it.startActivity(intent)
-                        it.finish() // opcional si quieres cerrar esta actividad
                     }
                 },
                 isMain = true

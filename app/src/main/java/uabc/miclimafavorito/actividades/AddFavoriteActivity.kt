@@ -4,6 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.ui.Modifier
+import uabc.miclimafavorito.presentation.screens.AddFavoriteView
 import uabc.miclimafavorito.ui.theme.MiClimaFavoritoTheme
 
 /*
@@ -20,15 +25,9 @@ class AddFavoriteActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MiClimaFavoritoTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    ChangeScoreView(
-//                        modifier = Modifier
-//                            .padding(innerPadding)
-//                            .fillMaxSize(),
-//                        maxScore = maxScore,
-//                        maxTiros = maxTiros
-//                    )
-//                }
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    AddFavoriteView(modifier = Modifier.padding(innerPadding))
+                }
             }
         }
     }
