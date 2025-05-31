@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "uabc.miclimafavorito"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -61,6 +61,9 @@ dependencies {
     implementation(libs.androidx.ui.text.google.fonts)
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.material3)
+
+    //  Necesario para imagenes cargaas desde internet (Imágenes asíncronas)
+    implementation(libs.coil.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

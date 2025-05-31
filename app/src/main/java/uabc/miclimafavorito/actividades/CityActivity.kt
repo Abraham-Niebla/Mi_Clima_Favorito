@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import uabc.miclimafavorito.presentation.screens.CityAddScreen
 import uabc.miclimafavorito.ui.theme.MiClimaFavoritoTheme
 
 /*
@@ -18,21 +19,17 @@ class CityActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val intent = intent
-//        val maxScore = intent.getIntExtra("maxScore", 0)
+        val cityUrl = intent.getStringExtra("city_url") ?: ""
 
         enableEdgeToEdge()
         setContent {
             MiClimaFavoritoTheme {
-//                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-//                    ChangeScoreView(
-//                        modifier = Modifier
-//                            .padding(innerPadding)
-//                            .fillMaxSize(),
-//                        maxScore = maxScore,
-//                        maxTiros = maxTiros
-//                    )
-//                }
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    CityAddScreen(
+                        modifier = Modifier.padding(innerPadding),
+                        cityUrl = cityUrl
+                    )
+                }
             }
         }
     }
