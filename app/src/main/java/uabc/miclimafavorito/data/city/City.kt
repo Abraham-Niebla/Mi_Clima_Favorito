@@ -17,12 +17,6 @@ data class City(
     @ColumnInfo(name = "tx_ciudad")
     val name: String,
 
-    @ColumnInfo(name = "dc_lat")
-    val lat: Double,
-
-    @ColumnInfo(name = "dc_lon")
-    val lon: Double,
-
     @ColumnInfo(name = "tx_url")
     val url: String
 )

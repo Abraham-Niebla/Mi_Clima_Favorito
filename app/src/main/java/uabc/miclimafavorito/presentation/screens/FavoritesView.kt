@@ -28,7 +28,8 @@ import uabc.miclimafavorito.presentation.components.FavoriteCityCard
 @Composable
 fun FavoritesView(
     modifier: Modifier = Modifier,
-    cityData: List<CityResponse>
+    cityData: List<CityResponse>,
+    onSwipe: (CityResponse) -> Unit
 ) {
     val activity = LocalActivity.current
     val context = LocalContext.current

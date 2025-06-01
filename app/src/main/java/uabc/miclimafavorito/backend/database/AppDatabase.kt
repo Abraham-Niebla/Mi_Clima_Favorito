@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import uabc.miclimafavorito.data.city.City
 import uabc.miclimafavorito.interfaces.city.CityDao
 
-@Database(entities = [City::class], version = 2)
+@Database(entities = [City::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cityDao(): CityDao

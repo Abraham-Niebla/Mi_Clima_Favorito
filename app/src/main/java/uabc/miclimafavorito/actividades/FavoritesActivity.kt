@@ -16,6 +16,7 @@ import uabc.miclimafavorito.data.city.CityResponse
 import uabc.miclimafavorito.data.weather.Current
 import uabc.miclimafavorito.presentation.screens.FavoritesView
 import uabc.miclimafavorito.ui.theme.MiClimaFavoritoTheme
+import uabc.miclimafavorito.data.city.City
 
 /*
 * Vista en donde se mostrarán todas las ciudades favoritas,
@@ -67,7 +68,14 @@ class FavoritesActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     FavoritesView(
                         modifier = Modifier.padding(innerPadding),
-                        cityData = cityData
+                        cityData = cityData,
+                        onSwipe = { cityResponse ->
+                            val city = City(
+                                name = cityResponse.name,
+                                url = cityResponse.url
+                            )
+                            cityViewModel.toggleCity(city)
+                        }
                     )
                 }
             }
