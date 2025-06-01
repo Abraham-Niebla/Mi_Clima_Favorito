@@ -21,8 +21,13 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import uabc.miclimafavorito.backend.apiService.WeatherViewModel
 import uabc.miclimafavorito.data.weather.Current
 import android.util.Log
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.ui.platform.LocalContext
 import uabc.miclimafavorito.actividades.CityActivity
+import uabc.miclimafavorito.backend.database.CityViewModel
+import uabc.miclimafavorito.data.city.City
+import uabc.miclimafavorito.presentation.components.SwipeItem
 
 @Composable
 fun AddFavoriteView(
@@ -57,6 +62,14 @@ fun AddFavoriteView(
         searchResults = results
     }
 
+    val cityViewModel: CityViewModel = viewModel()
+    fun onSwipe(cityResponse: CityResponse){
+        val city = City(
+            name = cityResponse.name,
+            url = cityResponse.url
+        )
+        cityViewModel.toggleCity(city)
+    }
 
     Scaffold(
         topBar = {
@@ -105,15 +118,25 @@ fun AddFavoriteView(
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(searchResults) { city ->
-                    FavoriteCityCard(
-                        cityData = city,
-                        onClick = {
-                            val intent = Intent(context, CityActivity::class.java).apply {
-                                putExtra("city_url", city.url)
-                            }
-                            context.startActivity(intent)
-                        }
 
+                    SwipeItem(
+                        modifier = Modifier,
+                        swipeIcon = Icons.Default.Favorite,
+                        swipeColor = MaterialTheme.colorScheme.primaryContainer,
+                        swipeAction = {
+                            onSwipe(city)
+                        },
+                        content = {
+                            FavoriteCityCard(
+                                cityData = city,
+                                onClick = {
+                                    val intent = Intent(context, CityActivity::class.java).apply {
+                                        putExtra("city_url", city.url)
+                                    }
+                                    context.startActivity(intent)
+                                }
+                            )
+                        },
                     )
                 }
             }

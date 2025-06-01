@@ -78,7 +78,7 @@ fun CityAddView(
                         Icon(
                             imageVector = Icons.Filled.Favorite,
                             contentDescription = "Favorito",
-                            tint = MaterialTheme.colorScheme.tertiaryContainer,
+                            tint = MaterialTheme.colorScheme.primaryContainer,
                             modifier = Modifier.fillMaxSize()
                         )
                     } else {

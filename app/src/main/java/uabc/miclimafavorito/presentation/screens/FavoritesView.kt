@@ -14,16 +14,19 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import uabc.miclimafavorito.actividades.AddFavoriteActivity
 import uabc.miclimafavorito.actividades.CityActivity
-import uabc.miclimafavorito.actividades.FavoritesActivity
 import uabc.miclimafavorito.data.city.CityResponse
 import uabc.miclimafavorito.presentation.components.FavoriteCityCard
+import uabc.miclimafavorito.presentation.components.SwipeItem
+
 
 @Composable
 fun FavoritesView(
@@ -51,7 +54,8 @@ fun FavoritesView(
                     }
                 }
             ) {
-                Icon(Icons.Default.Add,
+                Icon(
+                    Icons.Default.Add,
                     contentDescription = stringResource(R.string.add_city)
                 )
             }
@@ -66,15 +70,25 @@ fun FavoritesView(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(cityData) { city ->
-                FavoriteCityCard(
+                SwipeItem(
                     modifier = Modifier,
-                    cityData = city,
-                    onClick = {
-                        val intent = Intent(context, CityActivity::class.java).apply {
-                            putExtra("city_url", city.url)
-                        }
-                        context.startActivity(intent)
-                    }
+                    swipeIcon = Icons.Default.Delete,
+                    swipeColor = MaterialTheme.colorScheme.secondaryContainer,
+                    swipeAction = {
+                        onSwipe(city)
+                    },
+                    content = {
+                        FavoriteCityCard(
+                            modifier = Modifier,
+                            cityData = city,
+                            onClick = {
+                                val intent = Intent(context, CityActivity::class.java).apply {
+                                    putExtra("city_url", city.url)
+                                }
+                                context.startActivity(intent)
+                            }
+                        )
+                    },
                 )
             }
         }

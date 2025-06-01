@@ -60,8 +60,6 @@ fun CityAddScreen(
                     weather?.let {
                         val newCity = City(
                             name = it.location.name,
-                            lat = it.location.lat,
-                            lon = it.location.lon,
                             url = cityUrl
                         )
                         cityViewModel.insertCity(newCity)

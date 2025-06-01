@@ -26,7 +26,9 @@ class AddFavoriteActivity : ComponentActivity() {
         setContent {
             MiClimaFavoritoTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AddFavoriteView(modifier = Modifier.padding(innerPadding))
+                    AddFavoriteView(
+                        modifier = Modifier.padding(innerPadding),
+                    )
                 }
             }
         }

@@ -2,6 +2,7 @@ package uabc.miclimafavorito.presentation.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -15,6 +16,7 @@ import uabc.miclimafavorito.data.city.CityResponse
 import uabc.miclimafavorito.ui.theme.extendedColors
 import uabc.miclimafavorito.R
 import uabc.miclimafavorito.globals.BASE_ICON_URL
+import uabc.miclimafavorito.globals.ROUND_BORDERS_VALUE
 
 @Composable
 fun FavoriteCityCard(
@@ -45,7 +47,8 @@ fun FavoriteCityCard(
         colors = CardDefaults.elevatedCardColors(
             containerColor = backgroundColor,
             contentColor = contentColor
-        )
+        ),
+        shape = RoundedCornerShape(ROUND_BORDERS_VALUE), // Bordes redondeados
     ) {
         Row(
             modifier = Modifier
