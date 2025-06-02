@@ -54,4 +54,8 @@
     <string name="data2_prob_nieve">Prob nieve</string>
 
 
+    <string name="no_data">Sin datos</string>
+    <string name="search_city">Buscar ciudad</string>
+
+
 </resources>

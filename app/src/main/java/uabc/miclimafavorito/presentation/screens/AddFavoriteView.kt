@@ -111,7 +111,7 @@ fun AddFavoriteView(
                 OutlinedTextField(
                     value = cityInput,
                     onValueChange = { cityInput = it },
-                    label = { Text("Buscar ciudad") },
+                    label = { Text(text = stringResource(R.string.search_city)) },
                     modifier = Modifier.weight(1f),
                     singleLine = true
                 )
@@ -154,7 +154,7 @@ fun AddFavoriteView(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = "Sin datos",
+                        text = stringResource(R.string.no_data),
                         color = MaterialTheme.colorScheme.primary,
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.titleLarge
