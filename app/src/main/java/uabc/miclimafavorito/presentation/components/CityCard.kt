@@ -10,32 +10,56 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.CardDefaults
+import androidx.compose.ui.Alignment
 import uabc.miclimafavorito.data.weather.WeatherResponse
+import uabc.miclimafavorito.ui.theme.extendedColors
 
 
 @Composable
 fun CityCard(city: WeatherResponse) {
+
+    val backgroundColor = when (city.current.isDay) {
+        0 -> MaterialTheme.extendedColors.nightContainer
+        else -> MaterialTheme.extendedColors.dayContainer
+    }
+    val contentColor = when (city.current.isDay) {
+        0 -> MaterialTheme.extendedColors.onNightContainer
+        else -> MaterialTheme.extendedColors.onDayContainer
+    }
+
     ElevatedCard(
         shape = RoundedCornerShape(24.dp),
         modifier = Modifier
             .padding(16.dp)
-            .fillMaxSize()
+            .fillMaxSize(),
+        colors = CardDefaults.elevatedCardColors(
+            containerColor = backgroundColor,
+            contentColor = contentColor
+        )
     ) {
         LazyColumn(
-            modifier = Modifier.padding(24.dp)
+            modifier = Modifier.padding(10.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
             item {
-                Text(
-                    text = city.location.name,
-                    style = MaterialTheme.typography.headlineMedium
+                CityLocationCard(
+                    modifier = Modifier,
+                    locationData = city.location,
+                    contentColor = contentColor,
+                    onClick = {}
                 )
             }
 
             item {
-                Text(
-                    text = "${city.location.region}, ${city.location.country}",
-                    style = MaterialTheme.typography.bodyMedium
-                )
+//                CityConditionCard(
+//                    modifier        = Modifier,
+//                    currentData     = city.current,
+//                    maxTempC        = city.forecast.forecastDay[0].day.maxTempC,
+//                    minTempC        = city.forecast.forecastDay[0].day.minTempC,
+//                    contentColor    = contentColor
+//                )
             }
 
             item {
@@ -45,7 +69,6 @@ fun CityCard(city: WeatherResponse) {
                 )
             }
 
-            // Puedes seguir agregando más elementos aquí si el contenido crece
         }
     }
 }
