@@ -1,6 +1,9 @@
 package uabc.miclimafavorito.presentation.screens
 
+import android.content.Intent
+import android.net.Uri
 import androidx.activity.compose.LocalActivity
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.*
@@ -18,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import uabc.miclimafavorito.presentation.components.AppTopBar
 import uabc.miclimafavorito.presentation.components.ForecastColumnData
 import androidx.compose.foundation.lazy.items
+import androidx.compose.ui.platform.LocalContext
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -28,6 +32,7 @@ fun CityAddView(
     onFavoriteClick: () -> Unit = {}
 ) {
     val activity = LocalActivity.current
+    val context = LocalContext.current // Get the current context
 
     Scaffold(
         topBar = {
@@ -51,7 +56,24 @@ fun CityAddView(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(
-                    modifier = Modifier.weight(1f)
+                    modifier = Modifier
+                        .weight(1f)
+                        .clickable {
+                            // Determine the query for Google Maps
+                            val locationQuery =
+                                "${weather.location.name}, ${weather.location.region}, ${weather.location.country}"
+                            val gmmIntentUri = Uri.parse("geo:0,0?q=$locationQuery")
+                            val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                            mapIntent.setPackage("com.google.android.apps.maps") // Specify Google Maps package
+                            if (mapIntent.resolveActivity(context.packageManager) != null) {
+                                context.startActivity(mapIntent)
+                            } else {
+                                // If Google Maps app is not installed, open in a browser
+                                val webIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=$locationQuery")
+                                val webIntent = Intent(Intent.ACTION_VIEW, webIntentUri)
+                                context.startActivity(webIntent)
+                            }
+                        }
                 ) {
                     Text(
                         text = weather.location.name,
