@@ -15,7 +15,7 @@ import coil.compose.AsyncImage
 import uabc.miclimafavorito.data.city.CityResponse
 import uabc.miclimafavorito.ui.theme.extendedColors
 import uabc.miclimafavorito.R
-import uabc.miclimafavorito.globals.BASE_ICON_URL
+import uabc.miclimafavorito.backend.components.getIconUrl
 import uabc.miclimafavorito.globals.ROUND_BORDERS_VALUE
 
 @Composable
@@ -24,13 +24,6 @@ fun FavoriteCityCard(
     cityData: CityResponse,
     onClick: () -> Unit = {}
 ) {
-    val fileName = cityData.current.condition.icon.substringAfterLast("/")
-    val day = when (cityData.current.isDay) {
-        1 -> "day"
-        else -> "night"
-    }
-    val iconUrl = "https:${BASE_ICON_URL}/$day/$fileName"
-
     val backgroundColor = when (cityData.current.isDay) {
         0 -> MaterialTheme.extendedColors.nightContainer
         else -> MaterialTheme.extendedColors.dayContainer
@@ -74,10 +67,12 @@ fun FavoriteCityCard(
             Column(
                 modifier = Modifier
                     .align(Alignment.CenterVertically),
-//                horizontalAlignment = Alignment.End
             ) {
                 AsyncImage(
-                    model = iconUrl,
+                    model = getIconUrl(
+                        url     = cityData.current.condition.icon,
+                        isDay   = cityData.current.isDay
+                    ),
                     contentDescription = cityData.current.condition.description,
                     modifier = Modifier
                 )

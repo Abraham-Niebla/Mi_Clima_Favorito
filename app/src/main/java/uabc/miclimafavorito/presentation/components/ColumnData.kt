@@ -18,16 +18,13 @@ import java.time.format.TextStyle
 import java.util.Locale
 import coil.compose.AsyncImage
 import uabc.miclimafavorito.R
-import uabc.miclimafavorito.globals.BASE_ICON_URL
+import uabc.miclimafavorito.backend.components.getIconUrl
 
 @Composable
 fun ColumnData(
     forecast: ForecastDay,
     modifier: Modifier
 ) {
-    val fileName = forecast.day.condition.icon.substringAfterLast("/")
-    val iconUrl = "https:${BASE_ICON_URL}/day/$fileName"
-
     val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
     val outputFormatter = DateTimeFormatter.ofPattern("dd/MM")
 
@@ -49,7 +46,10 @@ fun ColumnData(
         )
         Spacer(modifier = Modifier.height(8.dp))
         AsyncImage(
-            model = iconUrl,
+            model = getIconUrl(
+                url     = forecast.day.condition.icon,
+                isDay   = 1
+            ),
             contentDescription = forecast.day.condition.description,
             modifier = Modifier
         )
