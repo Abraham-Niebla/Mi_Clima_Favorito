@@ -74,7 +74,7 @@ class FavoritesActivity : ComponentActivity() {
                                 name = cityResponse.name,
                                 url = cityResponse.url
                             )
-                            cityViewModel.toggleCity(city)
+                            cityViewModel.deleteCity(city)
                         }
                     )
                 }

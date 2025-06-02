@@ -32,13 +32,19 @@ class CityViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertCity(city: City) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insert(city)
+            val existingCity = repository.getCityByUrl(city.url)
+            if (existingCity == null) {
+                repository.insert(city)
+            }
         }
     }
 
     fun deleteCity(city: City) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.delete(city)
+            val existingCity = repository.getCityByUrl(city.url)
+            if (existingCity != null) {
+                repository.delete(existingCity)
+            }
         }
     }
 

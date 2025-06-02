@@ -68,7 +68,7 @@ fun AddFavoriteView(
             name = cityResponse.name,
             url = cityResponse.url
         )
-        cityViewModel.toggleCity(city)
+        cityViewModel.insertCity(city)
     }
 
     Scaffold(
