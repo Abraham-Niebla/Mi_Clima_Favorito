@@ -49,9 +49,9 @@
 
 
     <string name="data2_sens_termica">Sensación térmica</string>
-    <string name="data2_temp_prom">Temperatura promedio</string>
-    <string name="data2_prob_lluvia">Probabilidad de lluvia</string>
-    <string name="data2_prob_nieve">Probabilidad de nieve</string>
+    <string name="data2_temp_prom">Temp promedio</string>
+    <string name="data2_prob_lluvia">Prob lluvia</string>
+    <string name="data2_prob_nieve">Prob nieve</string>
 
 
 </resources>

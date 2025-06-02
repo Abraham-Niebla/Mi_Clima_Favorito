@@ -31,7 +31,7 @@ fun CiryUVCard(
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White.copy(alpha = 0.1f),
+            containerColor = MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.1f),
             contentColor = contentColor
         )
     ) {
@@ -48,12 +48,11 @@ fun CiryUVCard(
                     .fillMaxHeight(),
                 contentAlignment = Alignment.Center
             ) {
-//                Image(
-//                    painter = painterResource(id = R.drawable.ic_wind), // reemplaza con tu recurso real
-//                    contentDescription = "Ícono del viento",
-//                    modifier = Modifier.size(48.dp),
-//                    contentScale = ContentScale.Fit
-//                )
+                UVIndexIndicator(
+                    uvIndex     = currentData.uv,
+                    modifier    = Modifier,
+                    circleSize  = 25.dp
+                )
             }
 
             // Segunda columna: textos

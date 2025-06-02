@@ -1,6 +1,5 @@
 package uabc.miclimafavorito.presentation.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -10,14 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import uabc.miclimafavorito.data.weather.Current
-import uabc.miclimafavorito.R
 import uabc.miclimafavorito.backend.components.getWindDir
+import uabc.miclimafavorito.backend.components.windDirToDegrees
 
 @Composable
 fun CityWindCard(
@@ -30,20 +25,20 @@ fun CityWindCard(
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White.copy(alpha = 0.1f),
+            containerColor = MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.1f),
             contentColor = contentColor
         )
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp),
+                .padding(horizontal = 12.dp, vertical = 10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            // Primera columna: textos
+            // Textos: 2/3 del ancho
             Column(
                 modifier = Modifier
-                    .weight(3f),
+                    .weight(2f),
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
@@ -59,19 +54,19 @@ fun CityWindCard(
                 )
             }
 
-            // Segunda columna: imagen
+            // Flecha: 1/3 del ancho, centrada vertical y horizontalmente
             Box(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight(),
                 contentAlignment = Alignment.Center
             ) {
-//                Image(
-//                    painter = painterResource(id = R.drawable.ic_wind), // reemplaza con tu recurso real
-//                    contentDescription = "Ícono del viento",
-//                    modifier = Modifier.size(48.dp),
-//                    contentScale = ContentScale.Fit
-//                )
+                WindDirectionArrow(
+                    windDegree = windDirToDegrees(currentData.windDir),
+                    modifier = Modifier.size(50.dp),
+                    arrowColor = contentColor,
+                    size = 50.dp
+                )
             }
         }
     }

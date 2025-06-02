@@ -27,7 +27,7 @@ fun CityPlus1DataCard(
             .fillMaxWidth()
             .padding(vertical = 8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color.White.copy(alpha = 0.1f),
+            containerColor = MaterialTheme.colorScheme.inverseSurface.copy(alpha = 0.1f),
             contentColor = contentColor
         )
     ) {
