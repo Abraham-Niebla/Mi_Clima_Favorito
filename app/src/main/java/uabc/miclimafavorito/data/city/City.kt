@@ -7,16 +7,16 @@ import androidx.room.Index
 
 @Entity(
     tableName = "t_city",
-    indices = [Index(value = ["tx_url"], unique = true)]
+    indices = [Index(value = ["nm_id"], unique = true)]
 )
 data class City(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_ciudad")
-    val id: Int = 0,
+    val id: Long = 0,
 
     @ColumnInfo(name = "tx_ciudad")
     val name: String,
 
-    @ColumnInfo(name = "tx_url")
-    val url: String
+    @ColumnInfo(name = "nm_id")
+    val idCiudad: Long
 )

@@ -65,6 +65,9 @@ dependencies {
     //  Necesario para imagenes cargaas desde internet (Imágenes asíncronas)
     implementation(libs.coil.compose)
 
+    //  Necesario para HorizontalPager
+    implementation(libs.androidx.foundation)
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

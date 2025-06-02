@@ -19,9 +19,6 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.Alignment
 import androidx.lifecycle.viewmodel.compose.viewModel
 import uabc.miclimafavorito.backend.apiService.WeatherViewModel
-import uabc.miclimafavorito.data.weather.Current
-import android.util.Log
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.ui.platform.LocalContext
 import uabc.miclimafavorito.actividades.CityActivity
@@ -41,20 +38,20 @@ fun AddFavoriteView(
 
     // Lista de ejemplo vacía por ahora, puedes vincular a tu ViewModel más adelante
     var searchResults by remember { mutableStateOf(listOf<CityResponse>()) }
-    val weatherState by weatherViewModel.weatherState.collectAsState()
+//    val weatherState by weatherViewModel.weatherState.collectAsState()
     val citiesState by weatherViewModel.citiesState.collectAsState()
 
     LaunchedEffect(citiesState) {
         val results = mutableListOf<CityResponse>()
         for (citySearched in citiesState) {
             // Para cada ciudad obtenida, obtener su clima
-            val weatherData = weatherViewModel.getWeatherSuspend(citySearched.url)
+            val weatherData = weatherViewModel.getWeatherSuspend(citySearched.id)
             results.add(
                 CityResponse(
-                    name = citySearched.name,
+                    name = weatherData.location.name,
                     region = weatherData.location.region,
                     country = weatherData.location.country,
-                    url = citySearched.url,
+                    id = citySearched.id,
                     current = weatherData.current
                 )
             )
@@ -66,7 +63,7 @@ fun AddFavoriteView(
     fun onSwipe(cityResponse: CityResponse){
         val city = City(
             name = cityResponse.name,
-            url = cityResponse.url
+            idCiudad = cityResponse.id,
         )
         cityViewModel.insertCity(city)
     }
@@ -131,7 +128,7 @@ fun AddFavoriteView(
                                 cityData = city,
                                 onClick = {
                                     val intent = Intent(context, CityActivity::class.java).apply {
-                                        putExtra("city_url", city.url)
+                                        putExtra("city_id", city.id)
                                     }
                                     context.startActivity(intent)
                                 }

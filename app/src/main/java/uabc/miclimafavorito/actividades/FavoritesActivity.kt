@@ -39,13 +39,13 @@ class FavoritesActivity : ComponentActivity() {
                 val results = mutableListOf<CityResponse>()
                 for (city in favCities) {
                     try {
-                        val weather = weatherViewModel.getWeatherSuspend(city.url)
+                        val weather = weatherViewModel.getWeatherSuspend(city.idCiudad)
                         results.add(
                             CityResponse(
-                                name = city.name,
+                                name = weather.location.name,
                                 region = weather.location.region,
                                 country = weather.location.country,
-                                url = city.url,
+                                id = city.idCiudad,
                                 current = weather.current
                             )
                         )
@@ -55,7 +55,7 @@ class FavoritesActivity : ComponentActivity() {
                                 name = city.name,
                                 region = "Desconocido",
                                 country = "Desconocido",
-                                url = city.url,
+                                id = city.idCiudad,
                                 current = Current()
                             )
                         )
@@ -72,7 +72,7 @@ class FavoritesActivity : ComponentActivity() {
                         onSwipe = { cityResponse ->
                             val city = City(
                                 name = cityResponse.name,
-                                url = cityResponse.url
+                                idCiudad = cityResponse.id
                             )
                             cityViewModel.deleteCity(city)
                         }

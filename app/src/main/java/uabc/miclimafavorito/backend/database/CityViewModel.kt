@@ -32,7 +32,7 @@ class CityViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertCity(city: City) {
         viewModelScope.launch(Dispatchers.IO) {
-            val existingCity = repository.getCityByUrl(city.url)
+            val existingCity = repository.getCityById(city.idCiudad)
             if (existingCity == null) {
                 repository.insert(city)
             }
@@ -41,14 +41,14 @@ class CityViewModel(application: Application) : AndroidViewModel(application) {
 
     fun deleteCity(city: City) {
         viewModelScope.launch(Dispatchers.IO) {
-            val existingCity = repository.getCityByUrl(city.url)
+            val existingCity = repository.getCityById(city.idCiudad)
             if (existingCity != null) {
                 repository.delete(existingCity)
             }
         }
     }
 
-    fun getCityById(id: Int) {
+    fun getCityById(id: Long) {
         viewModelScope.launch(Dispatchers.IO) {
             _selectedCity.value = repository.getCityById(id)
         }
@@ -59,22 +59,4 @@ class CityViewModel(application: Application) : AndroidViewModel(application) {
             repository.getCities()
         }
     }
-
-    fun getCityByUrl(url: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            _selectedCity.value = repository.getCityByUrl(url)
-        }
-    }
-
-    fun toggleCity(city: City) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val existingCity = repository.getCityByUrl(city.url)
-            if (existingCity != null) {
-                repository.delete(existingCity)
-            } else {
-                repository.insert(city)
-            }
-        }
-    }
-
 }

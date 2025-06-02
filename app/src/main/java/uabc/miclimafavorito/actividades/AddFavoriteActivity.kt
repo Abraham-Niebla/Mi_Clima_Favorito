@@ -18,10 +18,6 @@ import uabc.miclimafavorito.ui.theme.MiClimaFavoritoTheme
 class AddFavoriteActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-//        val intent = intent
-//        val maxScore = intent.getIntExtra("maxScore", 0)
-
         enableEdgeToEdge()
         setContent {
             MiClimaFavoritoTheme {

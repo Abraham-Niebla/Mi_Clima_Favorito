@@ -7,7 +7,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import uabc.miclimafavorito.data.weather.WeatherResponse
 import uabc.miclimafavorito.data.weather.SearchResponse
-import android.util.Log
 
 class WeatherViewModel : ViewModel() {
 
@@ -17,9 +16,9 @@ class WeatherViewModel : ViewModel() {
     private val _citiesState = MutableStateFlow<List<SearchResponse>>(emptyList())
     val citiesState: StateFlow<List<SearchResponse>> = _citiesState
 
-    fun getWeather(ciudad: String) {
+    fun getWeather(idCiudad: Long) {
         viewModelScope.launch {
-            val data = fetchWeatherData(ciudad)
+            val data = fetchWeatherData(idCiudad)
             _weatherState.value = data
         }
     }
@@ -31,8 +30,8 @@ class WeatherViewModel : ViewModel() {
         }
     }
 
-    suspend fun getWeatherSuspend(ciudad: String): WeatherResponse {
-        return fetchWeatherData(ciudad)
+    suspend fun getWeatherSuspend(idCiudad: Long): WeatherResponse {
+        return fetchWeatherData(idCiudad)
     }
 
 

@@ -1,6 +1,5 @@
 package uabc.miclimafavorito.presentation.screens
 
-import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
@@ -21,7 +20,7 @@ import uabc.miclimafavorito.data.city.City
 
 @Composable
 fun CityAddScreen(
-    cityUrl: String,
+    cityId: Long,
     modifier: Modifier,
     cityViewModel: CityViewModel
 ) {
@@ -30,9 +29,9 @@ fun CityAddScreen(
     val weather by weatherViewModel.weatherState.collectAsState()
     val cityState by cityViewModel.selectedCity.collectAsState()
 
-    LaunchedEffect(cityUrl) {
-        weatherViewModel.getWeather(cityUrl)
-        cityViewModel.getCityByUrl(cityUrl)
+    LaunchedEffect(cityId) {
+        weatherViewModel.getWeather(cityId)
+        cityViewModel.getCityById(cityId)
     }
     // Cuando cambie el resultado de búsqueda
     LaunchedEffect(cityState) {
@@ -48,7 +47,6 @@ fun CityAddScreen(
             )
         }
     } else {
-        Log.d("CityAddScreen", "weather: $weather")
         // Ya hay datos, mostrar UI que ya tienes
         CityAddView(
             weather = weather ?: WeatherResponse(),
@@ -60,7 +58,7 @@ fun CityAddScreen(
                     weather?.let {
                         val newCity = City(
                             name = it.location.name,
-                            url = cityUrl
+                            idCiudad = cityId
                         )
                         cityViewModel.insertCity(newCity)
                     }

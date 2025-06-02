@@ -1,9 +1,5 @@
 package uabc.miclimafavorito.presentation.components
 
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
-import androidx.compose.ui.graphics.Color
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -29,7 +25,6 @@ fun ColumnData(
     forecast: ForecastDay,
     modifier: Modifier
 ) {
-    Log.d("ColumnData", "Icon: ${forecast.day.condition.icon}")
     val fileName = forecast.day.condition.icon.substringAfterLast("/")
     val iconUrl = "https:${BASE_ICON_URL}/day/$fileName"
 

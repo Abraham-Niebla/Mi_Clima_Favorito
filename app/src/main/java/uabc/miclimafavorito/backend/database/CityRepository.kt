@@ -16,16 +16,11 @@ class CityRepository(private val cityDao: CityDao) {
         cityDao.deleteCity(city)
     }
 
-    suspend fun getCityById(id: Int): City? {
+    suspend fun getCityById(id: Long): City? {
         return cityDao.getCityById(id)
     }
 
     fun getCities() {
         this.allCities = cityDao.getAllCities()
     }
-
-    suspend fun getCityByUrl(url: String): City? {
-        return cityDao.getCityByUrl(url)
-    }
-
 }

@@ -1,9 +1,6 @@
 package uabc.miclimafavorito.presentation.screens
 
-import android.os.Build
-import android.util.Log
 import androidx.activity.compose.LocalActivity
-import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material3.*
@@ -13,7 +10,6 @@ import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import uabc.miclimafavorito.data.weather.WeatherResponse
 import androidx.compose.material3.Text
@@ -99,7 +95,6 @@ fun CityAddView(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors()
             ) {
-                Log.d("CityAddView", "Número de días: ${weather.forecast.forecastDay.size}")
                 LazyRow(
                     modifier = Modifier
                         .padding(16.dp)
@@ -107,7 +102,6 @@ fun CityAddView(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(weather.forecast.forecastDay) { forecastDay ->
-                        Log.d("forecastDay", "$forecastDay")
                         ColumnData(
                             forecast = forecastDay,
                             modifier = Modifier.width(120.dp)

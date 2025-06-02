@@ -10,8 +10,8 @@ interface CityDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertCity(city: City): Long
 
-    @Query("SELECT * FROM t_city WHERE id_ciudad = :id")
-    suspend fun getCityById(id: Int): City?
+    @Query("SELECT * FROM t_city WHERE nm_id = :id LIMIT 1")
+    suspend fun getCityById(id: Long): City?
 
     @Query("SELECT * FROM t_city ORDER BY id_ciudad ASC")
     fun getAllCities(): Flow<List<City>>
@@ -19,6 +19,4 @@ interface CityDao {
     @Delete
     suspend fun deleteCity(city: City)
 
-    @Query("SELECT * FROM t_city WHERE tx_url = :url LIMIT 1")
-    suspend fun getCityByUrl(url: String): City?
 }

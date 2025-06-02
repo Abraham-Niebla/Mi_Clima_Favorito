@@ -3,7 +3,7 @@ package uabc.miclimafavorito.data.weather
 import com.google.gson.annotations.SerializedName
 
 data class SearchResponse(
-    @SerializedName("id") val id: Int               = 0,    // Id de la ciudad
+    @SerializedName("id") val id: Long               = 0,    // Id de la ciudad
     @SerializedName("name") val name: String        = "",   // Ciudad
     @SerializedName("region") val region: String    = "",   // Estado o región
     @SerializedName("country") val country: String  = "",   // País

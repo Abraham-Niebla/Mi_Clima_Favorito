@@ -70,6 +70,7 @@ fun FavoritesView(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             items(cityData) { city ->
+
                 SwipeItem(
                     modifier = Modifier,
                     swipeIcon = Icons.Default.Delete,
@@ -83,7 +84,7 @@ fun FavoritesView(
                             cityData = city,
                             onClick = {
                                 val intent = Intent(context, CityActivity::class.java).apply {
-                                    putExtra("city_url", city.url)
+                                    putExtra("city_id", city.id)
                                 }
                                 context.startActivity(intent)
                             }

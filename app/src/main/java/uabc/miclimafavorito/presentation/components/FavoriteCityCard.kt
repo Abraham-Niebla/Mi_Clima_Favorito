@@ -24,7 +24,6 @@ fun FavoriteCityCard(
     cityData: CityResponse,
     onClick: () -> Unit = {}
 ) {
-
     val fileName = cityData.current.condition.icon.substringAfterLast("/")
     val day = when (cityData.current.isDay) {
         1 -> "day"

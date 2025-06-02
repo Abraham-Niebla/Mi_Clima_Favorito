@@ -21,7 +21,7 @@ class CityActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val cityUrl = intent.getStringExtra("city_url") ?: ""
+        val cityId = intent.getLongExtra("city_id", 0)
         val cityViewModel: CityViewModel by viewModels()
 
         enableEdgeToEdge()
@@ -30,7 +30,7 @@ class CityActivity : ComponentActivity() {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     CityAddScreen(
                         modifier = Modifier.padding(innerPadding),
-                        cityUrl = cityUrl,
+                        cityId = cityId,
                         cityViewModel = cityViewModel
                     )
                 }
