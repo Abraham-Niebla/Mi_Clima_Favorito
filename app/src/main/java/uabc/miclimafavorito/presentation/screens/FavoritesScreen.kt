@@ -5,15 +5,16 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import uabc.miclimafavorito.data.weather.WeatherResponse
+import uabc.miclimafavorito.data.city.CityResponse
 
 @Composable
-fun WeatherScreen(
+fun FavoritesScreen(
     modifier: Modifier = Modifier,
-    cityData: List<WeatherResponse>
+    cityData: List<CityResponse>,
+    onSwipe: (CityResponse) -> Unit
 ) {
     val isLoading = cityData.isEmpty() || cityData.any {
-        it.location.name.isBlank() || it.current.tempC == 0.0
+        it.current.lastUpdated.isBlank() || it.current.tempC == 0.0
     }
 
     if (isLoading) {
@@ -24,9 +25,10 @@ fun WeatherScreen(
             CircularProgressIndicator()
         }
     } else {
-        WeatherView(
+        FavoritesView(
             modifier = modifier,
-            cityData = cityData
+            cityData = cityData,
+            onSwipe = onSwipe
         )
     }
 }
