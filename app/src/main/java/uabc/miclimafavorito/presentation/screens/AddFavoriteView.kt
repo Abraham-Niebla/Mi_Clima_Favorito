@@ -93,8 +93,7 @@ fun AddFavoriteView(
                 onBackClick = { activity?.finish() },
                 isMain = false
             )
-        },
-        modifier = modifier
+        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -171,6 +170,7 @@ fun AddFavoriteView(
                             modifier = Modifier,
                             swipeIcon = Icons.Default.Favorite,
                             swipeColor = MaterialTheme.colorScheme.primaryContainer,
+                            swipeIconColor = MaterialTheme.colorScheme.onPrimaryContainer,
                             swipeAction = {
                                 onSwipe(city)
                             },

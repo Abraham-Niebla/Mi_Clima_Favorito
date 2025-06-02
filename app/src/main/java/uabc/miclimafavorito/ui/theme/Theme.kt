@@ -105,25 +105,25 @@ private val darkScheme = darkColorScheme(
 
 val extendedLight = ExtendedColorScheme(
     day = dayLight,
-    dayContainer = onDayLight,
-    onDay = dayContainerLight,
+    dayContainer = dayContainerLight,
+    onDay = onDayLight,
     onDayContainer = onDayContainerLight,
 
     night = nightLight,
-    nightContainer = onNightLight,
-    onNight = nightContainerLight,
+    nightContainer = nightContainerLight,
+    onNight = onNightLight,
     onNightContainer = onNightContainerLight,
 )
 
 val extendedDark = ExtendedColorScheme(
     day = dayDark,
-    dayContainer = onDayDark,
-    onDay = dayContainerDark,
+    dayContainer = dayContainerDark,
+    onDay = onDayDark,
     onDayContainer = onDayContainerDark,
 
     night = nightDark,
-    nightContainer = onNightDark,
-    onNight = nightContainerDark,
+    nightContainer = nightContainerDark,
+    onNight = onNightDark,
     onNightContainer = onNightContainerDark,
 )
 

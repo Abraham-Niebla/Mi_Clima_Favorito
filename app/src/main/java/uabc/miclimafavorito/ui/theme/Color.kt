@@ -77,23 +77,23 @@ val surfaceContainerHighDark = Color(0xFF252C25)
 val surfaceContainerHighestDark = Color(0xFF30362F)
 
 
-val dayLight                = Color(0xFF31628d)
-val onDayLight              = Color(0xFF4a759b)
-val dayContainerLight       = Color(0xFFcfe5ff)
-val onDayContainerLight     = Color(0xFF124a73)
+val dayLight                = Color(0xFF00677c) // 0xFF 00677c
+val onDayLight              = Color(0xFFffffff) // 0xFF ffffff
+val dayContainerLight       = Color(0xFFb1ecff) // 0xFF b1ecff
+val onDayContainerLight     = Color(0xFF004e5e) // 0xFF 004e5e
 
-val dayDark                 = Color(0xFF9dcbfb)
-val onDayDark               = Color(0xFF003355)
-val dayContainerDark        = Color(0xFF124a73)
-val onDayContainerDark      = Color(0xFFcfe5ff)
+val dayDark                 = Color(0xFF86d1e9) // 0xFF 86d1e9
+val onDayDark               = Color(0xFF003641) // 0xFF 003641
+val dayContainerDark        = Color(0xFF004e5e) // 0xFF 004e5e
+val onDayContainerDark      = Color(0xFFb1ecff) // 0xFF b1ecff
 
 
-val nightLight              = Color(0xFF5b5891)
-val onNightLight            = Color(0xFF7572a2)
-val nightContainerLight     = Color(0xFFe3dfff)
-val onNightContainerLight   = Color(0xFF434078)
+val nightLight              = Color(0xFF4e5b92) // 0xFF 4e5b92
+val onNightLight            = Color(0xFFffffff) // 0xFF ffffff
+val nightContainerLight     = Color(0xFFbbbfda) // 0xFF bbbfda
+val onNightContainerLight   = Color(0xFF364479) // 0xFF 364479
 
-val nightDark               = Color(0xFFc4c0ff)
-val onNightDark             = Color(0xFF2d2960)
-val nightContainerDark      = Color(0xFF434078)
-val onNightContainerDark    = Color(0xFFe3dfff)
+val nightDark               = Color(0xFFb7c4ff) // 0xFF b7c4ff
+val onNightDark             = Color(0xFF1f2d61) // 0xFF 1f2d61
+val nightContainerDark      = Color(0xFF364479) // 0xFF 364479
+val onNightContainerDark    = Color(0xFFdde1ff) // 0xFF dde1ff

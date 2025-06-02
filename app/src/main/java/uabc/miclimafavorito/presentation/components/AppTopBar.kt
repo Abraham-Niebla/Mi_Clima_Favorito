@@ -22,9 +22,10 @@ fun AppTopBar(
     title: String,
     onBackClick: () -> Unit,
     isMain: Boolean,
-    backgroundColor: Color = Color.Transparent,                     // Color fondo por defecto
-    contentColor: Color = MaterialTheme.colorScheme.onSecondaryContainer     // Color texto e ícono por defecto
 ) {
+    val backgroundColor: Color  = Color.Transparent
+    val contentColor: Color     = MaterialTheme.colorScheme.primary
+
     TopAppBar(
         title = { Text(text = title, color = contentColor) },
         navigationIcon = {

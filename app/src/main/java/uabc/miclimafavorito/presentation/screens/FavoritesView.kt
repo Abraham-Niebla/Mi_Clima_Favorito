@@ -59,8 +59,7 @@ fun FavoritesView(
                     contentDescription = stringResource(R.string.add_city)
                 )
             }
-        },
-        modifier = modifier
+        }
     ) { paddingValues ->
         LazyColumn(
             modifier = Modifier
@@ -75,6 +74,7 @@ fun FavoritesView(
                     modifier = Modifier,
                     swipeIcon = Icons.Default.Delete,
                     swipeColor = MaterialTheme.colorScheme.secondaryContainer,
+                    swipeIconColor = MaterialTheme.colorScheme.onSecondaryContainer,
                     swipeAction = {
                         onSwipe(city)
                     },

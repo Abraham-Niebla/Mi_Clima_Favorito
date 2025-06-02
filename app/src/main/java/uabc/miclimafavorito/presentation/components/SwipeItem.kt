@@ -30,7 +30,8 @@ fun SwipeItem(
     modifier: Modifier = Modifier,
     swipeAction: () -> Unit = {},
     swipeIcon: ImageVector,
-    swipeColor: Color = MaterialTheme.colorScheme.inversePrimary,
+    swipeColor: Color,
+    swipeIconColor: Color,
     content: @Composable () -> Unit
 ) {
 
@@ -67,7 +68,7 @@ fun SwipeItem(
                                 .align(Alignment.CenterStart)
                                 .padding(start = 16.dp),
                             imageVector = swipeIcon,
-                            tint = MaterialTheme.colorScheme.inverseSurface,
+                            tint = swipeIconColor,
                             contentDescription = null
                         )
                     }
@@ -78,7 +79,7 @@ fun SwipeItem(
                                 .align(Alignment.CenterEnd)
                                 .padding(end = 16.dp),
                             imageVector = swipeIcon,
-                            tint = MaterialTheme.colorScheme.inverseSurface,
+                            tint = swipeIconColor,
                             contentDescription = null,
                         )
                     }

@@ -30,7 +30,6 @@ fun CityAddView(
     val activity = LocalActivity.current
 
     Scaffold(
-        modifier = modifier,
         topBar = {
             AppTopBar(
                 title = "",
