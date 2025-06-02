@@ -1,7 +1,14 @@
 package uabc.miclimafavorito.presentation.components
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
@@ -39,7 +46,7 @@ fun CityCard(city: WeatherResponse) {
         )
     ) {
         LazyColumn(
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(5.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -53,21 +60,78 @@ fun CityCard(city: WeatherResponse) {
             }
 
             item {
-//                CityConditionCard(
-//                    modifier        = Modifier,
-//                    currentData     = city.current,
-//                    maxTempC        = city.forecast.forecastDay[0].day.maxTempC,
-//                    minTempC        = city.forecast.forecastDay[0].day.minTempC,
-//                    contentColor    = contentColor
-//                )
+                CityConditionCard(
+                    modifier = Modifier,
+                    currentData = city.current,
+                    maxTempC = city.forecast.forecastDay[0].day.maxTempC,
+                    minTempC = city.forecast.forecastDay[0].day.minTempC,
+                    contentColor = contentColor
+                )
             }
 
             item {
-                Text(
-                    text = "Temp: ${city.current.tempC}°C",
-                    style = MaterialTheme.typography.titleLarge
+                CityForecastCard(
+                    modifier = Modifier,
+                    forecastData = listOf(
+                        city.forecast.forecastDay[1],
+                        city.forecast.forecastDay[2],
+                        city.forecast.forecastDay[3]
+                    ),
+                    contentColor = contentColor
                 )
             }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    CityWindCard(
+                        modifier = Modifier
+                            .weight(1f),
+                        currentData = city.current,
+                        contentColor = contentColor
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp)) // opcional para separar visualmente
+
+                    CiryUVCard(
+                        modifier = Modifier
+                            .weight(1f),
+                        currentData = city.current,
+                        contentColor = contentColor
+                    )
+                }
+            }
+
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly
+                ) {
+                    CityPlus1DataCard(
+                        modifier = Modifier
+                            .weight(1f),
+                        currentData = city.current,
+                        contentColor = contentColor
+                    )
+
+                    Spacer(modifier = Modifier.width(8.dp)) // opcional para separar visualmente
+
+                    CityPlus2DataCard(
+                        modifier = Modifier
+                            .weight(1f),
+                        currentData = city.current,
+                        forecastDayData = city.forecast.forecastDay[0].day,
+                        contentColor = contentColor,
+                    )
+                }
+            }
+
 
         }
     }

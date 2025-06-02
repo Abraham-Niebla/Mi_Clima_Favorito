@@ -16,7 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ExperimentalMaterial3Api
 import uabc.miclimafavorito.presentation.components.AppTopBar
-import uabc.miclimafavorito.presentation.components.ColumnData
+import uabc.miclimafavorito.presentation.components.ForecastColumnData
 import androidx.compose.foundation.lazy.items
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -102,12 +102,11 @@ fun CityAddView(
                     horizontalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     items(weather.forecast.forecastDay) { forecastDay ->
-                        ColumnData(
+                        ForecastColumnData(
                             forecast = forecastDay,
-                            modifier = Modifier.width(120.dp)
+                            modifier = Modifier
                         )
                     }
-
                 }
             }
         }

@@ -1,7 +1,6 @@
 package uabc.miclimafavorito.presentation.components
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -16,7 +15,6 @@ import coil.compose.AsyncImage
 import uabc.miclimafavorito.data.weather.Current
 import uabc.miclimafavorito.R
 import uabc.miclimafavorito.backend.components.getIconUrl
-import uabc.miclimafavorito.data.weather.Forecast
 
 @Composable
 fun CityConditionCard(
@@ -28,9 +26,7 @@ fun CityConditionCard(
 ) {
     Card(
         modifier = modifier
-            .padding(8.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.elevatedCardColors(
             containerColor = Color.Transparent,
             contentColor = contentColor
@@ -38,30 +34,28 @@ fun CityConditionCard(
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
                 text = stringResource(R.string.temp, currentData.tempC),
-                style = MaterialTheme.typography.displayLarge,
+                style = MaterialTheme.typography.displayMedium,
                 color = contentColor
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "${currentData.condition.description} ${maxTempC}/${minTempC}",
+                text = "${currentData.condition.description}    ${maxTempC}°C / ${minTempC}°C",
                 style = MaterialTheme.typography.titleMedium,
                 color = contentColor
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(5.dp))
             AsyncImage(
                 model = getIconUrl(
                     url     = currentData.condition.icon,
                     isDay   = currentData.isDay
                 ),
                 contentDescription = "Ícono del clima",
-                modifier = Modifier
-                    .size(64.dp)
+                modifier = Modifier.size(64.dp)
             )
         }
     }

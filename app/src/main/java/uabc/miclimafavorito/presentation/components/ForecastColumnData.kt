@@ -21,7 +21,7 @@ import uabc.miclimafavorito.R
 import uabc.miclimafavorito.backend.components.getIconUrl
 
 @Composable
-fun ColumnData(
+fun ForecastColumnData(
     forecast: ForecastDay,
     modifier: Modifier
 ) {

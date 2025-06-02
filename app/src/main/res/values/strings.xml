@@ -14,12 +14,44 @@
     <string name="favorites_title"> Ciudades Favoritas </string>
     <string name="weather_title"> Clima </string>
     <string name="add_city"> Agregar ciudad </string>
-    <string name="D"> A </string>
-    <string name="E"> A </string>
-    <string name="F"> A </string>
-    <string name="G"> A </string>
-    <string name="H"> A </string>
-    <string name="I"> A </string>
-    <string name="J"> A </string>
+
+
+    <string name="wind_n">Norte</string>
+    <string name="wind_nne">Nornoreste</string>
+    <string name="wind_ne">Noreste</string>
+    <string name="wind_ene">Estenoreste</string>
+    <string name="wind_e">Este</string>
+    <string name="wind_ese">Estesureste</string>
+    <string name="wind_se">Sureste</string>
+    <string name="wind_sse">Sursureste</string>
+    <string name="wind_s">Sur</string>
+    <string name="wind_ssw">Sursuroeste</string>
+    <string name="wind_sw">Suroeste</string>
+    <string name="wind_wsw">Oestesuroeste</string>
+    <string name="wind_w">Oeste</string>
+    <string name="wind_wnw">Oestenoroeste</string>
+    <string name="wind_nw">Noroeste</string>
+    <string name="wind_nnw">Nornoroeste</string>
+    <string name="wind_no_dir">Sin dirección</string>
+
+
+    <string name="uv_low">UV Bajo</string>
+    <string name="uv_moderate">UV Moderado</string>
+    <string name="uv_high">UV Alto</string>
+    <string name="uv_very_high">UV Muy alto</string>
+    <string name="uv_extreme">UV Extremo</string>
+    <string name="uv_unknown">Sin UV</string>
+
+    <string name="data1_presion">Presión</string>
+    <string name="data1_humedad">Humedad</string>
+    <string name="data1_nubosidad">Nubosidad</string>
+    <string name="data1_visibilidad">Visibilidad</string>
+
+
+    <string name="data2_sens_termica">Sensación térmica</string>
+    <string name="data2_temp_prom">Temperatura promedio</string>
+    <string name="data2_prob_lluvia">Probabilidad de lluvia</string>
+    <string name="data2_prob_nieve">Probabilidad de nieve</string>
+
 
 </resources>

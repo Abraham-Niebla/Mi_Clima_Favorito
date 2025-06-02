@@ -19,6 +19,7 @@ import uabc.miclimafavorito.backend.apiService.WeatherViewModel
 import uabc.miclimafavorito.backend.database.CityViewModel
 import uabc.miclimafavorito.data.weather.WeatherResponse
 import uabc.miclimafavorito.presentation.screens.WeatherScreen
+import uabc.miclimafavorito.presentation.screens.WeatherView
 import uabc.miclimafavorito.ui.theme.MiClimaFavoritoTheme
 
 /*

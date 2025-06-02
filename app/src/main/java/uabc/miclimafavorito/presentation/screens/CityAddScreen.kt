@@ -2,6 +2,7 @@ package uabc.miclimafavorito.presentation.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,12 +40,11 @@ fun CityAddScreen(
     }
 
     if (weather == null) {
-        // Mostrar carga mientras no hay datos
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            Text(
-                text = "Cargando datos",
-                style = MaterialTheme.typography.titleLarge
-            )
+        Box(
+            modifier = modifier.fillMaxSize(),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
         }
     } else {
         // Ya hay datos, mostrar UI que ya tienes
