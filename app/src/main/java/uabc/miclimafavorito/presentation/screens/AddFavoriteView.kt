@@ -1,6 +1,7 @@
 package uabc.miclimafavorito.presentation.screens
 
 import android.content.Intent
+import android.util.Log
 import androidx.activity.compose.LocalActivity
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -25,6 +26,9 @@ import uabc.miclimafavorito.actividades.CityActivity
 import uabc.miclimafavorito.backend.database.CityViewModel
 import uabc.miclimafavorito.data.city.City
 import uabc.miclimafavorito.presentation.components.SwipeItem
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.ui.text.style.TextAlign
+import uabc.miclimafavorito.data.weather.SearchResponse
 
 @Composable
 fun AddFavoriteView(
@@ -35,32 +39,46 @@ fun AddFavoriteView(
 
     val activity = LocalActivity.current
     var cityInput by remember { mutableStateOf("") }
+    var lastInput by remember { mutableStateOf("") }
+
+    var isLoading by remember { mutableStateOf(false) }
 
     // Lista de ejemplo vacía por ahora, puedes vincular a tu ViewModel más adelante
     var searchResults by remember { mutableStateOf(listOf<CityResponse>()) }
-//    val weatherState by weatherViewModel.weatherState.collectAsState()
     val citiesState by weatherViewModel.citiesState.collectAsState()
+    var previousSearch by remember { mutableStateOf<List<SearchResponse>>(emptyList()) }
 
     LaunchedEffect(citiesState) {
-        val results = mutableListOf<CityResponse>()
-        for (citySearched in citiesState) {
-            // Para cada ciudad obtenida, obtener su clima
-            val weatherData = weatherViewModel.getWeatherSuspend(citySearched.id)
-            results.add(
-                CityResponse(
-                    name = weatherData.location.name,
-                    region = weatherData.location.region,
-                    country = weatherData.location.country,
-                    id = citySearched.id,
-                    current = weatherData.current
-                )
-            )
+        if (citiesState != previousSearch) {
+            Log.d("AddFavoriteView", "results = '$citiesState'")
+
+            previousSearch = citiesState
+            val results = mutableListOf<CityResponse>()
+
+            if(citiesState[0].id != 0L) {
+                for (citySearched in citiesState) {
+                    val weatherData = weatherViewModel.getWeatherSuspend(citySearched.id)
+                    results.add(
+                        CityResponse(
+                            name = weatherData.location.name,
+                            region = weatherData.location.region,
+                            country = weatherData.location.country,
+                            id = citySearched.id,
+                            current = weatherData.current
+                        )
+                    )
+                }
+            }
+
+            searchResults = results
+            lastInput = cityInput
+            cityInput = ""
+            isLoading = false
         }
-        searchResults = results
     }
 
     val cityViewModel: CityViewModel = viewModel()
-    fun onSwipe(cityResponse: CityResponse){
+    fun onSwipe(cityResponse: CityResponse) {
         val city = City(
             name = cityResponse.name,
             idCiudad = cityResponse.id,
@@ -97,47 +115,81 @@ fun AddFavoriteView(
                     modifier = Modifier.weight(1f),
                     singleLine = true
                 )
+
                 Button(
                     onClick = {
-                        weatherViewModel.getCities(cityInput)
+                        isLoading = true
+                        if (lastInput == cityInput){
+                            isLoading = false
+                        }
+                        else{
+                            weatherViewModel.getCities(cityInput)
+                        }
                     },
-                    modifier = Modifier
+                    modifier = Modifier,
+                    enabled = !isLoading
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Search,
-                        contentDescription = "Buscar"
+
+                    if(isLoading){
+                        CircularProgressIndicator(
+                            modifier = Modifier
+                                .size(24.dp), // Tamaño compacto
+                        )
+                    }
+                    else{
+                        Icon(
+                            imageVector = Icons.Default.Search,
+                            contentDescription = "Buscar"
+                        )
+                    }
+                }
+
+            }
+
+            if(searchResults.isEmpty()){
+                Column(
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = "Sin datos",
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Center,
+                        style = MaterialTheme.typography.titleLarge
                     )
                 }
             }
-
-            LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                modifier = Modifier.fillMaxSize()
-            ) {
-                items(searchResults) { city ->
-
-                    SwipeItem(
-                        modifier = Modifier,
-                        swipeIcon = Icons.Default.Favorite,
-                        swipeColor = MaterialTheme.colorScheme.primaryContainer,
-                        swipeAction = {
-                            onSwipe(city)
-                        },
-                        content = {
-                            FavoriteCityCard(
-                                cityData = city,
-                                onClick = {
-                                    val intent = Intent(context, CityActivity::class.java).apply {
-                                        putExtra("city_id", city.id)
+            else {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(8.dp),
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(searchResults) { city ->
+                        SwipeItem(
+                            modifier = Modifier,
+                            swipeIcon = Icons.Default.Favorite,
+                            swipeColor = MaterialTheme.colorScheme.primaryContainer,
+                            swipeAction = {
+                                onSwipe(city)
+                            },
+                            content = {
+                                FavoriteCityCard(
+                                    cityData = city,
+                                    onClick = {
+                                        val intent = Intent(context, CityActivity::class.java).apply {
+                                            putExtra("city_id", city.id)
+                                        }
+                                        context.startActivity(intent)
                                     }
-                                    context.startActivity(intent)
-                                }
-                            )
-                        },
-                    )
+                                )
+                            },
+                        )
+                    }
                 }
             }
+
         }
     }
-
 }

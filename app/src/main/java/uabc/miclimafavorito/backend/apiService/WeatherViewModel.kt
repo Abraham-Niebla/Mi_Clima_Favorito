@@ -26,7 +26,10 @@ class WeatherViewModel : ViewModel() {
     fun getCities(ciudad: String) {
         viewModelScope.launch {
             val data = fetchCities(ciudad)
-            _citiesState.value = data
+            if (data.isEmpty())
+                _citiesState.value = listOf(SearchResponse())
+            else
+                _citiesState.value = data
         }
     }
 
