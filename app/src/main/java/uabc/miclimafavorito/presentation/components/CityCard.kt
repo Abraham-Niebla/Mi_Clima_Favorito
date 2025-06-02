@@ -1,30 +1,31 @@
 package uabc.miclimafavorito.presentation.components
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CardDefaults
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.platform.LocalContext
 import uabc.miclimafavorito.data.weather.WeatherResponse
 import uabc.miclimafavorito.ui.theme.extendedColors
 
 
 @Composable
 fun CityCard(city: WeatherResponse) {
+    val context = LocalContext.current // Get the current context
 
     val backgroundColor = when (city.current.isDay) {
         0 -> MaterialTheme.extendedColors.nightContainer
@@ -55,7 +56,20 @@ fun CityCard(city: WeatherResponse) {
                     modifier = Modifier,
                     locationData = city.location,
                     contentColor = contentColor,
-                    onClick = {}
+                    onClick = { locationQuery ->
+                        // Handle the click to open Google Maps
+                        val gmmIntentUri = Uri.parse("geo:0,0?q=$locationQuery")
+                        val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
+                        mapIntent.setPackage("com.google.android.apps.maps") // Specify Google Maps package
+                        if (mapIntent.resolveActivity(context.packageManager) != null) {
+                            context.startActivity(mapIntent)
+                        } else {
+                            // If Google Maps app is not installed, open in a browser
+                            val webIntentUri = Uri.parse("https://www.google.com/maps/search/?api=1&query=$locationQuery")
+                            val webIntent = Intent(Intent.ACTION_VIEW, webIntentUri)
+                            context.startActivity(webIntent)
+                        }
+                    }
                 )
             }
 
@@ -131,8 +145,6 @@ fun CityCard(city: WeatherResponse) {
                     )
                 }
             }
-
-
         }
     }
 }
