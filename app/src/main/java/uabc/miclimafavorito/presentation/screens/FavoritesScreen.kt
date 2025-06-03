@@ -13,7 +13,7 @@ fun FavoritesScreen(
     cityData: List<CityResponse>,
     onSwipe: (CityResponse) -> Unit
 ) {
-    val isLoading = cityData.isEmpty() || cityData.any {
+    val isLoading = cityData.any {
         it.current.lastUpdated.isBlank() || it.current.tempC == 0.0
     }
 

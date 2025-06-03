@@ -2,6 +2,7 @@ package uabc.miclimafavorito.presentation.components
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -25,6 +26,7 @@ import uabc.miclimafavorito.ui.theme.extendedColors
 
 @Composable
 fun CityCard(city: WeatherResponse) {
+    Log.d("CityCard", "forecastDay = ${city.forecast.forecastDay}")
     val context = LocalContext.current // Get the current context
 
     val backgroundColor = when (city.current.isDay) {
@@ -86,11 +88,12 @@ fun CityCard(city: WeatherResponse) {
             item {
                 CityForecastCard(
                     modifier = Modifier,
-                    forecastData = listOf(
-                        city.forecast.forecastDay[1],
-                        city.forecast.forecastDay[2],
-                        city.forecast.forecastDay[3]
-                    ),
+//                    forecastData = listOf(
+//                        city.forecast.forecastDay[1],
+//                        city.forecast.forecastDay[2],
+//                        city.forecast.forecastDay[3]
+//                    ),
+                    forecastData = city.forecast.forecastDay.drop(1),
                     contentColor = contentColor
                 )
             }

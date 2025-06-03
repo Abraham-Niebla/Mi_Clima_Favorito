@@ -12,7 +12,7 @@ fun WeatherScreen(
     modifier: Modifier = Modifier,
     cityData: List<WeatherResponse>
 ) {
-    val isLoading = cityData.isEmpty() || cityData.any {
+    val isLoading = cityData.any {
         it.location.name.isBlank() || it.current.tempC == 0.0
     }
 
